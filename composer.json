@@ -1,0 +1,21 @@
+{
+  "name": "abdullah/event-management-system",
+  "description": "A simple event management system in PHP using MVC architecture.",
+  "type": "project",
+  "require": {
+      "php": ">=8.2",
+      "vlucas/phpdotenv": "^5.5"
+  },
+  "autoload": {
+      "psr-4": {
+          "App\\": "app/",
+          "App\\Core\\": "app/Core/"
+      }
+  },
+  "scripts": {
+      "start": "php -S localhost:8000 -t public"
+  },
+  "config": {
+      "optimize-autoloader": true
+  }
+}
