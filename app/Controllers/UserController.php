@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Core\Database;
 use App\Core\Validator;
 use App\Models\User;
-use App\Core\Auth;
+
+
 class UserController
 {
 
@@ -130,7 +130,11 @@ class UserController
           }
       
           // If authentication succeeds, start session and redirect
-          session_start();
+          $_SESSION['user'] = [
+              'id' => $user['id'],
+              'name' => $user['name'],
+              'email' => $user['email'],
+          ];
           $_SESSION['user_id'] = $user['id'];
           header('Location: /dashboard');
           exit;

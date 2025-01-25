@@ -1,4 +1,8 @@
-<?php include __DIR__ . '/../templates/header.php'; ?>
+<?php 
+$title = "register";
+include __DIR__ . '/../templates/header.php';
+ 
+?>
 
 <div class="container mt-5 d-flex justify-content-center">
     <div class="row w-100 justify-content-center">

@@ -23,6 +23,14 @@ class Auth
             exit;
         }
     }
+
+    public static function getUser()
+    {
+        if(self::isLoggedIn()) {
+            return $_SESSION['user'];
+        }
+        return null;
+    }
 }
 
 
