@@ -25,8 +25,10 @@ $router->get('/dashboard', [DashboardController::class, 'index'], true);
 $router->get('/events', [EventController::class, 'index'], true);
 $router->get('/events/create', [EventController::class, 'create'], true);
 $router->post('/events/store', [EventController::class, 'store'], true);
+$router->get('/events/{id}', [EventController::class, 'show'], true);
 $router->get('/events/edit/{id}', [EventController::class, 'edit'], true);
 $router->post('/events/update/{id}', [EventController::class, 'update'], true);
+$router->get('/events/delete/{id}', [EventController::class, 'delete'], true);
 $router->get('/logout', [UserController::class, 'logout'], true);
 
 $router->resolve($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

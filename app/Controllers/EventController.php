@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Core\Auth;
+use App\Core\Validator;
 use App\Models\Event;
 
 class EventController
@@ -43,6 +44,28 @@ class EventController
               'max_capacity' => $_POST['max_capacity']
           ];
 
+           // Validation rules
+        $rules = [
+            'name' => ['required', ['max', 150]],
+            'description' => ['required'],
+            'date' => ['required', 'date'],
+            'time' => ['required', 'time'],
+            'location' => ['required'],
+            'max_capacity' => ['required', 'integer', ['min', 1]],
+        ];
+
+        $validator = new Validator();
+
+        if(!$validator->validate($data, $rules)) {
+          
+          $errors = $validator->getErrors();
+
+          // Pass errors and data back to the form
+          require_once __DIR__ . '/../Views/events/create.php';
+          return;
+        }
+
+
       
           $event= new Event();
           if ($event->createEvent($data)) {
@@ -52,6 +75,15 @@ class EventController
       }
     
     }
+
+    public function show($id) {
+      
+        $event = new Event();
+        $eventDetails = $event->find($id);
+
+        require_once __DIR__ . '/../Views/events/show.php';
+    }
+
 
     public function edit($id) {
 
@@ -86,6 +118,29 @@ class EventController
     
 
     }
+
+    public function delete($id) {
+    $event = new Event();
+    
+    // Check if the event exists and belongs to the logged-in user
+    $user = Auth::getUser();
+    $eventDetails = $event->find($id);
+    
+    if (!$eventDetails || $eventDetails['user_id'] != $user['id']) {
+        http_response_code(403);
+        echo "Unauthorized or event not found.";
+        return;
+    }
+
+    // Delete the event
+    $event->delete($id);
+
+    // Redirect back to the events list
+    header('Location: /events');
+    exit;
+}
+
+
 }
 
 ?>
