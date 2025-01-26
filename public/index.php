@@ -9,19 +9,29 @@ require_once __DIR__ . '/../app/Core/bootstrap.php';
 use App\Controllers\UserController;
 use App\Controllers\DashboardController;
 use App\Controllers\EventController;
+use App\Controllers\HomePageController;
+use App\Controllers\AttendeeController;
 use App\Core\Router;
 
 
 $router = new Router();
 
 // Public routes
+$router->get('/', [HomePageController::class, 'home']);
 $router->get('/login', [UserController::class, 'showLoginForm']);
 $router->post('/login', [UserController::class, 'login']);
 $router->get('/register', [UserController::class, 'showRegisterForm']);
 $router->post('/register', [UserController::class, 'register']);
 
+
+$router->get('/events/{id}/register', [AttendeeController::class, 'registerForm']);
+$router->post('/attendees/store', [AttendeeController::class, 'register']);
+
+
 // Protected routes
 $router->get('/dashboard', [DashboardController::class, 'index'], true);
+// $router->get('/dashboard', [EventController::class, 'dashboard'], true);
+
 $router->get('/events', [EventController::class, 'index'], true);
 $router->get('/events/create', [EventController::class, 'create'], true);
 $router->post('/events/store', [EventController::class, 'store'], true);

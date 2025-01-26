@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use PDO;
+
 class Event extends BaseModel
 {
     protected $table = 'events';
@@ -29,11 +31,11 @@ class Event extends BaseModel
         return $stmt->execute($data);
     }
 
-    public function deleteEvent($eventId, $userId)
-    {
-        $stmt = $this->db->getConnection()->prepare("DELETE FROM {$this->table} WHERE id = :id AND user_id = :user_id");
-        return $stmt->execute(['id' => $eventId, 'user_id' => $userId]);
-    }
+    // public function deleteEvent($eventId, $userId)
+    // {
+    //     $stmt = $this->db->getConnection()->prepare("DELETE FROM {$this->table} WHERE id = :id AND user_id = :user_id");
+    //     return $stmt->execute(['id' => $eventId, 'user_id' => $userId]);
+    // }
 
     public function getUpcomingEvents()
     {
@@ -41,4 +43,76 @@ class Event extends BaseModel
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getPaginatedEvents($limit, $offset, $sortField = 'date', $sortOrder = 'ASC', $filters = [])
+    {
+        $query = "SELECT * FROM {$this->table}";
+        $conditions = [];
+        $params = [];
+    
+        // Add filters
+        if (!empty($filters['location'])) {
+            $conditions[] = 'location LIKE :location';
+            $params['location'] = '%' . $filters['location'] . '%';
+        }
+        if (!empty($filters['organizer'])) {
+            $conditions[] = 'organizer = :organizer';
+            $params['organizer'] = $filters['organizer'];
+        }
+        if (!empty($filters['upcoming'])) {
+            $conditions[] = 'date >= CURDATE()';
+        }
+    
+        if ($conditions) {
+            $query .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+    
+        // Add sorting
+        $query .= " ORDER BY {$sortField} {$sortOrder}";
+    
+        // Add pagination
+        $query .= " LIMIT :limit OFFSET :offset";
+    
+        $stmt = $this->db->getConnection()->prepare($query);
+    
+        // Bind parameters (cast limit and offset to integers)
+        foreach ($params as $key => $value) {
+            $stmt->bindValue(":{$key}", $value);
+        }
+        $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+    
+        $stmt->execute();
+    
+        return $stmt->fetchAll();
+    }
+    
+
+    public function countEvents($filters = [])
+    {
+        $query = "SELECT COUNT(*) as total FROM {$this->table}";
+        $conditions = [];
+        $params = [];
+
+        if (!empty($filters['location'])) {
+            $conditions[] = 'location LIKE :location';
+            $params['location'] = '%' . $filters['location'] . '%';
+        }
+        if (!empty($filters['organizer'])) {
+            $conditions[] = 'organizer = :organizer';
+            $params['organizer'] = $filters['organizer'];
+        }
+        if (!empty($filters['upcoming'])) {
+            $conditions[] = 'date >= CURDATE()';
+        }
+
+        if ($conditions) {
+            $query .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+
+        $stmt = $this->db->getConnection()->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchColumn();
+    }
+
 }

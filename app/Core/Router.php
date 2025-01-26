@@ -28,6 +28,7 @@ class Router
     public function resolve($uri, $method)
     {
         // Remove trailing slash and normalize the URI
+        $uri = parse_url($uri, PHP_URL_PATH); // Remove query parameters
         $uri = trim($uri, '/');
     
         // Check if the route requires authentication

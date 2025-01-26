@@ -10,7 +10,9 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Event Manager</a>
+    <a class="navbar-brand" href="/">
+        <img src="https://img.favpng.com/4/14/11/event-management-logo-business-png-favpng-xt7ZWenbTPUpDV2XqZXbyesRt.jpg" width="60" alt="">
+    </a>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
             <?php if (Auth::isLoggedIn()): ?>
