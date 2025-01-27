@@ -4,6 +4,10 @@
 <div class="flex-grow-1" style="margin-left: 250px;">
   <div class="p-3">
     <div class="container mt-5">
+    <div id="alertMessage" class="alert alert-dismissible fade show d-none" role="alert">
+        <!-- Message will be dynamically inserted here -->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
       <h1 class="mb-4">Create a new event</h1>
       <a class="btn btn-primary" href="/events">Event List</a>
       <form id="registrationForm" method="POST" action="/events/store" novalidate>

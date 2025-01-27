@@ -31,12 +31,6 @@ class Event extends BaseModel
         return $stmt->execute($data);
     }
 
-    // public function deleteEvent($eventId, $userId)
-    // {
-    //     $stmt = $this->db->getConnection()->prepare("DELETE FROM {$this->table} WHERE id = :id AND user_id = :user_id");
-    //     return $stmt->execute(['id' => $eventId, 'user_id' => $userId]);
-    // }
-
     public function getUpcomingEvents()
     {
         $stmt = $this->db->getConnection()->prepare("SELECT * FROM {$this->table} WHERE date >= CURDATE() ORDER BY date ASC");

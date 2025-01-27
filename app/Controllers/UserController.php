@@ -134,6 +134,7 @@ class UserController
               'id' => $user['id'],
               'name' => $user['name'],
               'email' => $user['email'],
+              'role' => $user['role'],
           ];
           $_SESSION['user_id'] = $user['id'];
           header('Location: /dashboard');

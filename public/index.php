@@ -11,6 +11,7 @@ use App\Controllers\DashboardController;
 use App\Controllers\EventController;
 use App\Controllers\HomePageController;
 use App\Controllers\AttendeeController;
+use App\Controllers\EventReportController;
 use App\Core\Router;
 
 
@@ -30,7 +31,6 @@ $router->post('/attendees/store', [AttendeeController::class, 'register']);
 
 // Protected routes
 $router->get('/dashboard', [DashboardController::class, 'index'], true);
-// $router->get('/dashboard', [EventController::class, 'dashboard'], true);
 
 $router->get('/events', [EventController::class, 'index'], true);
 $router->get('/events/create', [EventController::class, 'create'], true);
@@ -39,6 +39,12 @@ $router->get('/events/{id}', [EventController::class, 'show'], true);
 $router->get('/events/edit/{id}', [EventController::class, 'edit'], true);
 $router->post('/events/update/{id}', [EventController::class, 'update'], true);
 $router->get('/events/delete/{id}', [EventController::class, 'delete'], true);
+
+// Reports
+$router->get('/reports', [EventReportController::class, 'showAllEvent'], true);
+$router->get('/events/reports', [EventReportController::class, 'downloadAttendeeReport']);
+
+
 $router->get('/logout', [UserController::class, 'logout'], true);
 
 $router->resolve($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

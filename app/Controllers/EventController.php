@@ -69,8 +69,9 @@ class EventController
       
           $event= new Event();
           if ($event->createEvent($data)) {
-              header("Location: /events");
-              exit;
+              
+              return redirectWithMessage('/events', 'Event Created Successfully', 'success');
+
           }
       }
     
@@ -111,8 +112,8 @@ class EventController
     
         $event = new Event();
         if ($event->updateEvent($id, $data)) {
-            header("Location: /events");
-            exit;
+           
+            return redirectWithMessage('/events', 'Event Data Updated Successfully!', 'success');
         }
     }
     
@@ -120,25 +121,22 @@ class EventController
     }
 
     public function delete($id) {
+
     $event = new Event();
-    
-    // Check if the event exists and belongs to the logged-in user
     $user = Auth::getUser();
     $eventDetails = $event->find($id);
     
     if (!$eventDetails || $eventDetails['user_id'] != $user['id']) {
         http_response_code(403);
-        echo "Unauthorized or event not found.";
-        return;
+        
+        return redirectWithMessage('/events', 'Unauthorized or event not found!', 'warning');
     }
 
     // Delete the event
     $event->delete($id);
 
-    // Redirect back to the events list
-    header('Location: /events');
-    exit;
-}
+    return redirectWithMessage('/events', 'Event deleted successfully!', 'success');
+  }
 
 
 }

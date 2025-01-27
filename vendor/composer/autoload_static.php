@@ -10,6 +10,7 @@ class ComposerStaticInit6707fac64e578be39cb719bc032c49d0
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        'bd16a86202f7eeb42453da49cf8d66db' => __DIR__ . '/../..' . '/app/Helper/Helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -33,7 +34,6 @@ class ComposerStaticInit6707fac64e578be39cb719bc032c49d0
         ),
         'A' => 
         array (
-            'App\\Core\\' => 9,
             'App\\' => 4,
         ),
     );
@@ -63,10 +63,6 @@ class ComposerStaticInit6707fac64e578be39cb719bc032c49d0
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'App\\Core\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/app/Core',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -74,10 +70,20 @@ class ComposerStaticInit6707fac64e578be39cb719bc032c49d0
     );
 
     public static $classMap = array (
+        'App\\Controllers\\AttendeeController' => __DIR__ . '/../..' . '/app/Controllers/AttendeeController.php',
+        'App\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Controllers/DashboardController.php',
+        'App\\Controllers\\EventController' => __DIR__ . '/../..' . '/app/Controllers/EventController.php',
+        'App\\Controllers\\EventReportController' => __DIR__ . '/../..' . '/app/Controllers/EventReportController.php',
+        'App\\Controllers\\HomePageController' => __DIR__ . '/../..' . '/app/Controllers/HomePageController.php',
         'App\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Controllers/UserController.php',
+        'App\\Core\\Auth' => __DIR__ . '/../..' . '/app/Core/Auth.php',
         'App\\Core\\Database' => __DIR__ . '/../..' . '/app/Core/Database.php',
         'App\\Core\\Router' => __DIR__ . '/../..' . '/app/Core/Router.php',
         'App\\Core\\Validator' => __DIR__ . '/../..' . '/app/Core/Validator.php',
+        'App\\Helper\\Helper' => __DIR__ . '/../..' . '/app/Helper/Helper.php',
+        'App\\Models\\Attendee' => __DIR__ . '/../..' . '/app/Models/Attendee.php',
+        'App\\Models\\BaseModel' => __DIR__ . '/../..' . '/app/Models/BaseModel.php',
+        'App\\Models\\Event' => __DIR__ . '/../..' . '/app/Models/Event.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
