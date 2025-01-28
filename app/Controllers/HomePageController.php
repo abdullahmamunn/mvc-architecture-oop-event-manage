@@ -8,8 +8,18 @@ class HomePageController
 {
     public function home()
     {
+        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 12;
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
+
+        $sortField = $_GET['sortField'] ?? 'date';
+        $sortOrder = $_GET['sortOrder'] ?? 'ASC';
+
         $event = new Event();
-        $events = $event->getAll(); // Fetch all events from the database.
+        $events = $event->getAllDataWithPaginate($limit, $offset, $sortField, $sortOrder);
+
+        $totalEvents = $event->count();
+        $totalPages = ceil($totalEvents / $limit);
 
         require_once __DIR__ . '/../Views/home.php';
     }

@@ -38,7 +38,7 @@ class Event extends BaseModel
         return $stmt->fetchAll();
     }
 
-    public function getPaginatedEvents($limit, $offset, $sortField = 'date', $sortOrder = 'ASC', $filters = [])
+    public function getFilterEvents($limit, $offset, $sortField = 'date', $sortOrder = 'ASC', $filters = [])
     {
         $query = "SELECT * FROM {$this->table}";
         $conditions = [];
@@ -80,7 +80,6 @@ class Event extends BaseModel
     
         return $stmt->fetchAll();
     }
-    
 
     public function countEvents($filters = [])
     {

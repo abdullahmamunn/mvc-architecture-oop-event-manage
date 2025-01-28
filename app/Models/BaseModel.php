@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Database;
+use PDO;
 
 class BaseModel
 {
@@ -32,4 +33,32 @@ class BaseModel
         $stmt = $this->db->getConnection()->prepare("DELETE FROM {$this->table} WHERE id = :id");
         return $stmt->execute(['id' => $id]);
     }
+
+    public function getAllDataWithPaginate($limit, $offset, $sortField = 'date', $sortOrder = 'ASC') {
+        $query = "SELECT * FROM {$this->table}";
+         // Add sorting
+         $query .= " ORDER BY {$sortField} {$sortOrder}";
+    
+         // Add pagination
+         $query .= " LIMIT :limit OFFSET :offset";
+     
+         $stmt = $this->db->getConnection()->prepare($query);
+
+         $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+         $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+     
+         $stmt->execute();
+     
+         return $stmt->fetchAll();
+    }
+
+    public function count()
+    {
+        $query = "SELECT COUNT(*) as total FROM {$this->table}";
+       
+        $stmt = $this->db->getConnection()->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
 }

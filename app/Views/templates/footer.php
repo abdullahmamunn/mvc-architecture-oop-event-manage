@@ -1,5 +1,3 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <?php if (isset($_SESSION['alert'])): ?>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -17,3 +15,25 @@
   </script>
   <?php unset($_SESSION['alert']); ?>
 <?php endif; ?>
+
+<script>
+  // JavaScript for toggling dropdown
+  function toggleDropdown() {
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    dropdownMenu.classList.toggle('active');
+  }
+
+  // Close the dropdown if clicked outside
+  document.addEventListener('click', function(e) {
+    const dropdown = document.querySelector('.dropdown');
+    const isClickInside = dropdown.contains(e.target);
+    if (!isClickInside) {
+      const dropdownMenu = document.querySelector('.dropdown-menu');
+      dropdownMenu.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+
+</html>

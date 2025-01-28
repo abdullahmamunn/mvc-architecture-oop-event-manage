@@ -26,14 +26,14 @@ class EventReportController
           'upcoming' => $_GET['upcoming'] ?? null,
       ];
 
-      $events = $event->getPaginatedEvents($limit, $offset, $sortField, $sortOrder, $filters);
+      $events = $event->getFilterEvents($limit, $offset, $sortField, $sortOrder, $filters);
       $totalEvents = $event->countEvents($filters);
 
       $totalPages = ceil($totalEvents / $limit);
 
       if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) and $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
         // Only return the main content for AJAX
-        include_once __DIR__ . '/../Views/Dashboard/partials/content.php';
+        include_once __DIR__ . '/../Views/reports/partials/content.php';
         return;
     }
 

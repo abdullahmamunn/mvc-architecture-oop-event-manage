@@ -25,9 +25,19 @@ class User
 
     public function create(array $data): bool
     {
+        // Insert user into database
         $query = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
         $stmt = $this->db->getConnection()->prepare($query);
-        return $stmt->execute($data);
+        
+        if ($stmt->execute($data)) {
+            // If user creation is successful, fetch the user details and store them in session
+            $user = $this->getUserByEmail($data['email']);
+            
+            // Store user details in session
+            $_SESSION['user'] = $user;
+            return true;
+        }
+        return false;
     }
 
     public function getUserByEmail($email)

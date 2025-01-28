@@ -37,4 +37,11 @@ class Database
     {
         return $this->connection;
     }
+
+    public function fetchOne($query, $params = [])
+    {
+        $stmt = $this->getConnection()->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchColumn();
+    }
 }

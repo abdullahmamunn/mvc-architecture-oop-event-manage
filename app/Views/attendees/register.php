@@ -26,17 +26,17 @@ use App\Core\Auth; ?>
                 <input type="hidden" id="event_id" name="event_id" value="<?= $eventId; ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" class="form-control" required>
+                    <input type="text" id="name" name="name" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
+                    <input type="email" id="email" name="email" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="text" id="phone" name="phone" class="form-control" required>
+                    <input type="text" id="phone" name="phone" class="form-control">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Register</button>

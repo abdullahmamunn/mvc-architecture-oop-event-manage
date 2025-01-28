@@ -27,7 +27,8 @@ class DashboardController
               'upcoming' => $_GET['upcoming'] ?? null,
           ];
 
-          $events = $event->getPaginatedEvents($limit, $offset, $sortField, $sortOrder, $filters);
+          $events = $event->getFilterEvents($limit, $offset, $sortField, $sortOrder, $filters);
+          
           $totalEvents = $event->countEvents($filters);
 
           $totalPages = ceil($totalEvents / $limit);

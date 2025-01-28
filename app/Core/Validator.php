@@ -76,24 +76,44 @@ class Validator
         }
     }
 
-
-    // public function validateRequired(array $fields): bool
-    // {
-    //     foreach ($fields as $field) {
-    //         if (trim($field) === '') {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
-
-    public function validatePattern(string $value, string $pattern): bool
+    protected function validateEmail($field, $value)
     {
-        return preg_match($pattern, $value) === 1;
+        if (!empty($value) && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            $this->errors[$field][] = "The $field field must be a valid email address.";
+        }
     }
 
-    public function validateEmail(string $email): bool
+    protected function validatePattern($field, $value, $pattern)
     {
-        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+        if (!empty($value) && !preg_match($pattern, $value)) {
+            $this->errors[$field][] = "The $field field does not match the required pattern.";
+        }
     }
+
+    protected function validatePassword($field, $value)
+    {
+        $pattern = '/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
+        
+        if (!empty($value) && !preg_match($pattern, $value)) {
+            $this->errors[$field][] = "The $field must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.";
+        }
+    }
+
+    protected function validateUnique($field, $value, $tableColumn)
+    {
+        if (!empty($value)) {
+            // Split the table and column name
+            [$table, $column] = explode('.', $tableColumn);
+
+            // Assuming you have a Database class for querying
+            $db = new \App\Core\Database(); // Replace with your DB connection logic
+            $query = "SELECT COUNT(*) FROM $table WHERE $column = :value";
+            $result = $db->fetchOne($query, ['value' => $value]);
+
+            if ($result > 0) {
+                $this->errors[$field][] = "The $field field must be unique.";
+            }
+        }
+    }
+
 }

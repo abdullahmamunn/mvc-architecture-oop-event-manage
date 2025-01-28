@@ -4,11 +4,10 @@
 <div class="flex-grow-1" style="margin-left: 250px;">
   <div class="p-3">
     <div class="container mt-5">
-    <div id="alertMessage" class="alert alert-dismissible fade show d-none" role="alert">
-        <!-- Message will be dynamically inserted here -->
+      <div id="alertMessage" class="alert alert-dismissible fade show d-none" role="alert">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-      <h1 class="mb-4">Create a new event</h1>
+      <h4 class="mb-4">Create a new event</h4>
       <a class="btn btn-primary" href="/events">Event List</a>
       <form id="registrationForm" method="POST" action="/events/store" novalidate>
         <div class="form-group">
@@ -62,9 +61,70 @@
         <button type="submit" class="btn btn-primary w-100">Register</button>
       </form>
     </div>
-
   </div>
 </div>
 
+<script>
+  $(document).ready(function() {
+    $("#registrationForm").validate({
+      rules: {
+        name: {
+          required: true,
+          maxlength: 150
+        },
+        description: {
+          required: true
+        },
+        date: {
+          required: true,
+          date: true
+        },
+        time: {
+          required: true
+        },
+        location: {
+          required: true
+        },
+        max_capacity: {
+          required: true,
+          number: true,
+          min: 1
+        }
+      },
+      messages: {
+        name: {
+          required: "Please enter the event name.",
+          maxlength: "Event name cannot exceed 150 characters."
+        },
+        description: {
+          required: "Please enter a description."
+        },
+        date: {
+          required: "Please select a date.",
+          date: "Please enter a valid date."
+        },
+        time: {
+          required: "Please select a time."
+        },
+        location: {
+          required: "Please enter the location."
+        },
+        max_capacity: {
+          required: "Please enter the capacity.",
+          number: "Capacity must be a number.",
+          min: "Capacity must be at least 1."
+        }
+      },
+      errorClass: "is-invalid",
+      validClass: "is-valid",
+      errorPlacement: function(error, element) {
+        error.addClass("invalid-feedback");
+        element.closest(".form-group, .mb-3").append(error);
+      }
+    });
+  });
+</script>
 
 <?php include __DIR__ . '/../templates/footer.php'; ?>
+
+

@@ -65,14 +65,12 @@ class EventController
           return;
         }
 
+        $event= new Event();
+        if ($event->createEvent($data)) {
+            
+            return redirectWithMessage('/events', 'Event Created Successfully', 'success');
 
-      
-          $event= new Event();
-          if ($event->createEvent($data)) {
-              
-              return redirectWithMessage('/events', 'Event Created Successfully', 'success');
-
-          }
+        }
       }
     
     }
@@ -96,29 +94,49 @@ class EventController
     }
 
     public function update($id) {
-
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $auth = Auth::getUser();
-       
-        $data = [
-            'name'        => $_POST['name'],
-            'user_id'     => $auth['id'],
-            'description' => $_POST['description'],
-            'date'        => $_POST['date'],
-            'time'        => $_POST['time'],
-            'location'    => $_POST['location'],
-            'max_capacity'=> $_POST['max_capacity']
-        ];
-    
-        $event = new Event();
-        if ($event->updateEvent($id, $data)) {
-           
-            return redirectWithMessage('/events', 'Event Data Updated Successfully!', 'success');
-        }
-    }
-    
-
-    }
+          $auth = Auth::getUser();
+  
+          $data = [
+              'name'        => $_POST['name'],
+              'user_id'     => $auth['id'],
+              'description' => $_POST['description'],
+              'date'        => $_POST['date'],
+              'time'        => $_POST['time'],
+              'location'    => $_POST['location'],
+              'max_capacity'=> $_POST['max_capacity']
+          ];
+  
+          // Validation rules
+          $rules = [
+              'name' => ['required', ['max', 150]],
+              'description' => ['required'],
+              'date' => ['required', 'date'],
+              'time' => ['required', 'time'],
+              'location' => ['required'],
+              'max_capacity' => ['required', 'integer', ['min', 1]],
+          ];
+  
+          $validator = new Validator();
+  
+          // Validate the data
+          if (!$validator->validate($data, $rules)) {
+              $errors = $validator->getErrors();
+  
+              // Pass errors and data back to the form
+              $event = new Event();
+              $eventData = $event->find($id); // Get current event data for the form
+  
+              require_once __DIR__ . '/../Views/events/edit.php';
+              return;
+          }
+  
+          $event = new Event();
+          if ($event->updateEvent($id, $data)) {
+              return redirectWithMessage('/events', 'Event Data Updated Successfully!', 'success');
+          }
+      }
+  }
 
     public function delete($id) {
 

@@ -31,69 +31,58 @@ class UserController
           $email = $_POST['email'] ?? '';
           $password = $_POST['password'] ?? '';
 
-          // var_dump($name, $email, $password);
-          // exit();
+          $data = [
+            'name' => $name,
+            'email' => $email,
+            'password' => $password
+        ];
+// var_dump($data);
+         // Validation rules
+      $rules = [
+          'name' => ['required', ['max', 20]],
+          'email' => ['required', 'email', ['unique', 'users.email']],
+          'password' => ['required', 'password'],
 
-          if (empty($name) || strlen($name) < 3) {
-              $errors[] = "name must be at least 3 characters.";
-          }
-      
-          if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-              $errors[] = "Invalid email address.";
-          }
-      
-          if (empty($password) || strlen($password) < 6) {
-              $errors[] = "Password must be at least 6 characters.";
-          }
+      ];
 
-          // Basic Validation
-          $validator = new Validator();
-          if (!$validator->validateRequired([$name, $email, $password])) {
-            $errors[] = "All fields are required!";
-            
-          }
+      $validator = new Validator();
 
-          if (!$validator->validatePattern($name, '/^[a-zA-Z0-9_]{5,20}$/')) {
-            $errors[] = "Invalid name format!";
- 
-          }
+      if(!$validator->validate($data, $rules)) {
+        
+        $errors = $validator->getErrors();
 
-          if (!$validator->validateEmail($email)) {
-            $errors[] = "Invalid email format!";
-           
-          }
+        // var_dump($errors);
+        // die();
 
-          // Check if name or email already exists
-          $userModel = new User();
-          if ($userModel->exists('name', $name)) {
-            $errors[] = "name already exists!";
-            
-          }
-
-          if ($userModel->exists('email', $email)) {
-            $errors[] = "Email already exists!";
-           
-          }
-
-          // If errors exist, display them
-          if (!empty($errors)) {
-              require_once __DIR__ . '/../Views/users/register.php';
-              return;
-          }
-
-          // Hash Password
+        require_once __DIR__ . '/../Views/users/register.php';
+        return;
+      }
+         
           $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+          $userModel = new User();
 
           // Save User
-          $userModel->create([
+          $user = $userModel->create([
               'name' => $name,
               'email' => $email,
               'password' => $hashedPassword,
           ]);
 
+         if($user) {
+
+           http_response_code(200);
+           
+           $message = 'Congratulations Mr/Mrs. <strong>' . htmlspecialchars($user['name']) . '</strong>, You have created an account successfully!';
+           return redirectWithMessage('/dashboard', $message, 'success');
+         } else {
+
+          $errors[] = "something wrong!";
+          require_once __DIR__ . '/../Views/users/register.php';
+          return;
+         }
               // Redirect to login page
-          header('Location: /login');
-          exit;
+          // header('Location: /login');
+          // exit;
       }
   }
 

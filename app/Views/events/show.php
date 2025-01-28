@@ -11,8 +11,8 @@
         </div>
         <div class="card-body">
           <p><strong>Description:</strong> <?= htmlspecialchars($eventDetails['description']); ?></p>
-          <p><strong>Date:</strong> <?= htmlspecialchars($eventDetails['date']); ?></p>
-          <p><strong>Time:</strong> <?= htmlspecialchars($eventDetails['time']); ?></p>
+          <p><strong>Date:</strong> <?= formatDate($eventDetails['date']); ?></p>
+          <p><strong>Time:</strong> <?= formatTime($eventDetails['time']); ?></p>
           <p><strong>Location:</strong> <?= htmlspecialchars($eventDetails['location']); ?></p>
           <p><strong>Maximum Capacity:</strong> <?= htmlspecialchars($eventDetails['max_capacity']); ?></p>
         </div>
