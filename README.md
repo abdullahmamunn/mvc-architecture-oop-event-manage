@@ -50,7 +50,6 @@ The **Event Management System** is a simple, web-based application built with pu
 
 3. **Set up environment variables**:
 
-   - Copy the `.env.example` file and rename it to `.env`
    - Configure database credentials in the `.env` file:
      ```env
      DB_HOST=127.0.0.1
@@ -66,7 +65,7 @@ The **Event Management System** is a simple, web-based application built with pu
      ```sql
      CREATE DATABASE event_management;
      ```
-   - Import the provided SQL file (`database/event_management.sql`) into the database.
+   - Import the provided SQL file (`database/db_schema.sql`) into the database.
 
 5. **Start the server**:
 
@@ -80,22 +79,9 @@ The **Event Management System** is a simple, web-based application built with pu
 
 | Role  | Email                                          | Password    |
 | ----- | ---------------------------------------------- | ----------- |
-| Admin | [admin@example.com](mailto\:admin@example.com) | password123 |
-| User  | [user@example.com](mailto\:user@example.com)   | password123 |
+| Admin | [admin@mail.com](mailto\:admin@example.com) | password123 |
+| User  | [user@email.com](mailto\:user@example.com)   | password123 |
 
-## Project Structure
-
-```
-/event-management-system
-│-- app/                  # Application core (Models, Controllers, Views, Helpers)
-│-- public/               # Public directory (index.php, assets)
-│-- config/               # Configuration files
-│-- database/             # Database files
-│-- vendor/               # Composer dependencies
-│-- .env                  # Environment configuration
-│-- composer.json         # PHP dependencies
-│-- README.md             # Project documentation
-```
 
 ## License
 
