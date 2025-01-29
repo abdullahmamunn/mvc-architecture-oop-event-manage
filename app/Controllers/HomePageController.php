@@ -23,4 +23,16 @@ class HomePageController
 
         require_once __DIR__ . '/../Views/home.php';
     }
+
+    public function eventDetails($id) {
+
+        $event = new Event();
+        $eventDetails = $event->getEventAttendees($id);
+        $event = $eventDetails[0];
+        
+        // var_dump($event);
+        // die();
+
+        require_once __DIR__ . '/../Views/events/details.php';
+    }
 }

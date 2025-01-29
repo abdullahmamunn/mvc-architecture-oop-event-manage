@@ -108,4 +108,24 @@ class Event extends BaseModel
         return $stmt->fetchColumn();
     }
 
+    public function getEventAttendees($eventId)
+    {
+        $query = "SELECT e.name AS event_name, 
+                         e.id, e.description, e.date, e.time, e.location, e.max_capacity,
+                         a.name AS attendee_name, a.email, a.phone, a.registered_at, 
+                         u.name AS organizer_name
+                  FROM events e
+                  LEFT JOIN attendees a ON a.event_id = e.id
+                  JOIN users u ON e.user_id = u.id
+                  WHERE e.id = :event_id"; // Ensure to use e.id for the event filter
+    
+        $stmt = $this->db->getConnection()->prepare($query);
+        $stmt->bindParam(':event_id', $eventId, \PDO::PARAM_INT);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    
+
 }

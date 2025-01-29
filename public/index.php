@@ -26,6 +26,7 @@ $router->post('/register', [UserController::class, 'register']);
 
 
 $router->get('/events/{id}/register', [AttendeeController::class, 'registerForm']);
+$router->get('/event/details/{id}', [HomePageController::class, 'eventDetails']);
 $router->post('/attendees/store', [AttendeeController::class, 'register']);
 
 

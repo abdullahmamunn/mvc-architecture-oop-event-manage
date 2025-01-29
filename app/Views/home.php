@@ -44,7 +44,9 @@
                             <td><?= htmlspecialchars($event['location']); ?></td>
                             <td><?= htmlspecialchars($event['max_capacity']); ?></td>
                             <td>
-                                <a href="/events/<?= $event['id']; ?>" class="btn btn-sm btn-primary">View</a>
+                                <a href="/event/details/<?= $event['id']; ?>" class="btn btn-sm btn-primary">View</a>
+                                <!-- <a href="/event/details" class="btn btn-sm btn-primary">View</a> -->
+                                
                                 <?php if ($attendee->countAttendees($event['id']) >= $event['max_capacity']): ?>
                                     <a href="#" class="btn btn-sm btn-danger" disabled>Slots out</a>
                                 <?php else: ?>

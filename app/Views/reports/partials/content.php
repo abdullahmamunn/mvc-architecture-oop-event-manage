@@ -22,10 +22,7 @@
                 <input type="text" class="form-control" name="location" placeholder="Filter by location" value="<?= $_GET['location'] ?? '' ?>">
 
               </div>
-              <div class="col-md-2">
-                <input type="text" class="form-control" name="organizer" placeholder="Filter by organizer" value="<?= $_GET['organizer'] ?? '' ?>">
 
-              </div>
               <div class="col-md-2">
                 <label>
                   Upcoming Events:

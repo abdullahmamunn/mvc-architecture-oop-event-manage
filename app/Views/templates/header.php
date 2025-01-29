@@ -101,27 +101,36 @@ use App\Core\Auth; ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">
             <img src="https://img.favpng.com/4/14/11/event-management-logo-business-png-favpng-xt7ZWenbTPUpDV2XqZXbyesRt.jpg" width="60" alt="">
+            Event Home
         </a>
         <div class="collapse navbar-collapse">
+
             <ul class="navbar-nav ms-auto">
                 <?php if (Auth::isLoggedIn()): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <button class="dropdown-toggle-btn" onclick="toggleDropdown()"><?php $user = Auth::getUser(); echo ucfirst($user['name']); ?></button>
+                        <button class="dropdown-toggle-btn" onclick="toggleDropdown()"><?php $user = Auth::getUser();
+                                                                                        echo ucfirst($user['name']); ?></button>
                         <ul class="dropdown-menu">
                             <li><a href="/logout">Logout</a></li>
                         </ul>
                     </li>
                 <?php else: ?>
+                    <form class="form-inline">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+                    </form>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/register">Register</a>
                     </li>
-                <?php endif; ?>
             </ul>
+
+        <?php endif; ?>
+
         </div>
     </nav>

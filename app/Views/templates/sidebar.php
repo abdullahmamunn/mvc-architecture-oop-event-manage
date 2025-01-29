@@ -20,11 +20,11 @@
                     <i class="bi bi-file-earmark-text"></i> Event Reports
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="/profile">
                     <i class="bi bi-person"></i> Profile
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link text-danger" href="/logout">
                     <i class="bi bi-box-arrow-right"></i> Logout
