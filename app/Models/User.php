@@ -34,6 +34,8 @@ class User
             $user = $this->getUserByEmail($data['email']);
             
             // Store user details in session
+
+            $_SESSION['user_id'] = $user['id'];
             $_SESSION['user'] = $user;
             return true;
         }

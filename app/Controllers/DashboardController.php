@@ -23,7 +23,7 @@ class DashboardController
 
           $filters = [
               'location' => $_GET['location'] ?? null,
-              'organizer' => $_GET['organizer'] ?? null,
+              'name'     => $_GET['name'] ?? null,
               'upcoming' => $_GET['upcoming'] ?? null,
           ];
 

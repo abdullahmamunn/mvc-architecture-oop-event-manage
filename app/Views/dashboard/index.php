@@ -23,6 +23,7 @@ include __DIR__ . '/../templates/sidebar.php';
     <div class="container">
 
       <div class="row">
+        <!-- <?php echo $_SERVER['HTTP_REFERER'];?> -->
         <div class="col-md-12">
           <div id="alertMessage" class="alert alert-dismissible fade show d-none" role="alert">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -37,7 +38,7 @@ include __DIR__ . '/../templates/sidebar.php';
 
               </div>
               <div class="col-md-2">
-                <input type="text" class="form-control" name="organizer" placeholder="Filter by organizer" value="<?= $_GET['organizer'] ?? '' ?>">
+                <input type="text" class="form-control" name="name" placeholder="Filter by Name" value="<?= $_GET['name'] ?? '' ?>">
 
               </div>
               <div class="col-md-2">
@@ -61,26 +62,22 @@ include __DIR__ . '/../templates/sidebar.php';
             <thead>
               <tr>
                 <th><a href="?sortField=name&sortOrder=<?= $sortOrder === 'ASC' ? 'DESC' : 'ASC' ?>">Name</a></th>
+                <th>Organizer</th>
                 <th><a href="?sortField=date&sortOrder=<?= $sortOrder === 'ASC' ? 'DESC' : 'ASC' ?>">Date</a></th>
                 <th>Time</th>
                 <th>Location</th>
                 <th>Capacity</th>
-                <th>Download CSV</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($events as $event): ?>
                 <tr>
                   <td><?= $event['name'] ?></td>
+                  <td><?= $event['organizer_name'];?></td>
                   <td><?= formatDate($event['date']) ?></td>
                   <td><?= formatTime($event['time']) ?></td>
                   <td><?= $event['location'] ?></td>
                   <td><?= $event['max_capacity'] ?></td>
-                  <td>
-                    <a href="/events/reports?event_id=<?= $event['id'] ?>" class="btn btn-sm btn-info">
-                      <i class="bi bi-filetype-csv"></i> Attendee Lists
-                    </a>
-                  </td>
                 </tr>
               <?php endforeach; ?>
             </tbody>

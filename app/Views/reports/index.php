@@ -9,7 +9,7 @@ include __DIR__ . '/../templates/sidebar.php';
   <div id="dashboardContent">
     <!-- Dashboard content goes here -->
     <div class="p-3">
-      <h3 class="text-center">Reports</h3>
+      <h3 class="text-center">Event Reports</h3>
     </div>
     <div class="container">
 
@@ -25,10 +25,6 @@ include __DIR__ . '/../templates/sidebar.php';
             <div class="row">
               <div class="col-md-2">
                 <input type="text" class="form-control" name="location" placeholder="Filter by location" value="<?= $_GET['location'] ?? '' ?>">
-
-              </div>
-              <div class="col-md-2">
-                <input type="text" class="form-control" name="organizer" placeholder="Filter by organizer" value="<?= $_GET['organizer'] ?? '' ?>">
 
               </div>
               <div class="col-md-2">
@@ -52,6 +48,7 @@ include __DIR__ . '/../templates/sidebar.php';
             <thead>
               <tr>
                 <th><a href="?sortField=name&sortOrder=<?= $sortOrder === 'ASC' ? 'DESC' : 'ASC' ?>">Name</a></th>
+                <th>Organizer</th>
                 <th><a href="?sortField=date&sortOrder=<?= $sortOrder === 'ASC' ? 'DESC' : 'ASC' ?>">Date</a></th>
                 <th>Location</th>
                 <th>Capacity</th>
@@ -62,7 +59,9 @@ include __DIR__ . '/../templates/sidebar.php';
               <?php foreach ($events as $event): ?>
                 <tr>
                   <td><?= $event['name'] ?></td>
-                  <td><?= $event['date'] ?></td>
+                  <td><?= $event['organizer_name'];?></td>
+                  <td><?= formatDate($event['date']) ?></td>
+                  <td><?= formatTime($event['time']) ?></td>
                   <td><?= $event['location'] ?></td>
                   <td><?= $event['max_capacity'] ?></td>
                   <td>

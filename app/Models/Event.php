@@ -40,21 +40,24 @@ class Event extends BaseModel
 
     public function getFilterEvents($limit, $offset, $sortField = 'date', $sortOrder = 'ASC', $filters = [])
     {
-        $query = "SELECT * FROM {$this->table}";
+        $query = "SELECT e.*, u.name AS organizer_name 
+                  FROM {$this->table} e
+                  LEFT JOIN users u ON e.user_id = u.id";
+        
         $conditions = [];
         $params = [];
     
         // Add filters
         if (!empty($filters['location'])) {
-            $conditions[] = 'location LIKE :location';
+            $conditions[] = 'e.location LIKE :location';
             $params['location'] = '%' . $filters['location'] . '%';
         }
-        if (!empty($filters['organizer'])) {
-            $conditions[] = 'organizer = :organizer';
-            $params['organizer'] = $filters['organizer'];
+        if (!empty($filters['name'])) {
+            $conditions[] = 'e.name LIKE :name';
+            $params['name'] = '%' . $filters['name'] . '%';
         }
         if (!empty($filters['upcoming'])) {
-            $conditions[] = 'date >= CURDATE()';
+            $conditions[] = 'e.date >= CURDATE()';
         }
     
         if ($conditions) {
@@ -62,7 +65,7 @@ class Event extends BaseModel
         }
     
         // Add sorting
-        $query .= " ORDER BY {$sortField} {$sortOrder}";
+        $query .= " ORDER BY e.{$sortField} {$sortOrder}";
     
         // Add pagination
         $query .= " LIMIT :limit OFFSET :offset";
@@ -80,7 +83,7 @@ class Event extends BaseModel
     
         return $stmt->fetchAll();
     }
-
+    
     public function countEvents($filters = [])
     {
         $query = "SELECT COUNT(*) as total FROM {$this->table}";
@@ -91,10 +94,7 @@ class Event extends BaseModel
             $conditions[] = 'location LIKE :location';
             $params['location'] = '%' . $filters['location'] . '%';
         }
-        if (!empty($filters['organizer'])) {
-            $conditions[] = 'organizer = :organizer';
-            $params['organizer'] = $filters['organizer'];
-        }
+        
         if (!empty($filters['upcoming'])) {
             $conditions[] = 'date >= CURDATE()';
         }

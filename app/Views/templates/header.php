@@ -109,7 +109,7 @@ use App\Core\Auth; ?>
                         <a class="nav-link" href="/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <button class="dropdown-toggle-btn" onclick="toggleDropdown()"><?php echo $user['name']; ?></button>
+                        <button class="dropdown-toggle-btn" onclick="toggleDropdown()"><?php $user = Auth::getUser(); echo ucfirst($user['name']); ?></button>
                         <ul class="dropdown-menu">
                             <li><a href="/logout">Logout</a></li>
                         </ul>

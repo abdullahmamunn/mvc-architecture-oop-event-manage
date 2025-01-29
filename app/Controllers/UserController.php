@@ -36,8 +36,7 @@ class UserController
             'email' => $email,
             'password' => $password
         ];
-// var_dump($data);
-         // Validation rules
+
       $rules = [
           'name' => ['required', ['max', 20]],
           'email' => ['required', 'email', ['unique', 'users.email']],
@@ -58,31 +57,24 @@ class UserController
         return;
       }
          
-          $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-          $userModel = new User();
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $userModel = new User();
 
-          // Save User
-          $user = $userModel->create([
-              'name' => $name,
-              'email' => $email,
-              'password' => $hashedPassword,
-          ]);
+        // Save User
+        $userModel->create([
+            'name' => $name,
+            'email' => $email,
+            'password' => $hashedPassword,
+        ]);
 
-         if($user) {
+        http_response_code(200);
 
-           http_response_code(200);
-           
-           $message = 'Congratulations Mr/Mrs. <strong>' . htmlspecialchars($user['name']) . '</strong>, You have created an account successfully!';
-           return redirectWithMessage('/dashboard', $message, 'success');
-         } else {
-
-          $errors[] = "something wrong!";
-          require_once __DIR__ . '/../Views/users/register.php';
-          return;
-         }
-              // Redirect to login page
-          // header('Location: /login');
-          // exit;
+        // var_dump($_SESSION['user']['name']);
+        // die();
+        
+        $message = 'Congratulations Mr/Mrs. <strong>' . htmlspecialchars($name) . '</strong>, You have created an account successfully!';
+        return redirectWithMessage('/dashboard', $message, 'success');
+         
       }
   }
 

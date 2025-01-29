@@ -60,6 +60,9 @@ class EventReportController
            return redirectWithMessage('/reports', 'Event ID is required', 'danger');
        }
 
+       $event = new Event();
+       $event = $event->find($eventId);
+
        $attendee = new Attendee();
        $attendees = $attendee->getAttendeesByEvent($eventId);
 
@@ -70,19 +73,20 @@ class EventReportController
        }
 
        // Generate CSV
-       $csvFilename = "event_{$eventId}_attendees.csv";
+       $csvFilename = "event_{$event['name']}_attendee_list.csv";
        header('Content-Type: text/csv');
        header('Content-Disposition: attachment;filename="' . $csvFilename . '"');
 
        $output = fopen('php://output', 'w');
-       fputcsv($output, ['Name', 'Email', 'Phone', 'Registered At']); // CSV header
+       fputcsv($output, ['Attendee Name', 'Email', 'Phone', 'Registered At', 'Organized By']); // CSV header
 
        foreach ($attendees as $attendee) {
            fputcsv($output, [
-               $attendee['name'],
+               $attendee['attendee_name'],
                $attendee['email'],
                $attendee['phone'],
-               $attendee['registered_at']
+               $attendee['registered_at'],
+               $attendee['organizer_name']
            ]);
        }
 

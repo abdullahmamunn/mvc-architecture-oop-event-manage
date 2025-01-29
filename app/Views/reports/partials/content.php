@@ -47,6 +47,7 @@
             <thead>
               <tr>
                 <th><a href="?sortField=name&sortOrder=<?= $sortOrder === 'ASC' ? 'DESC' : 'ASC' ?>">Name</a></th>
+                <th>Organizer</th>
                 <th><a href="?sortField=date&sortOrder=<?= $sortOrder === 'ASC' ? 'DESC' : 'ASC' ?>">Date</a></th>
                 <th>Time</th>
                 <th>Location</th>
@@ -58,6 +59,7 @@
               <?php foreach ($events as $event): ?>
                 <tr>
                   <td><?= $event['name'] ?></td>
+                  <td><?= $event['organizer_name'];?></td>
                   <td><?= formatDate($event['date']) ?></td>
                   <td><?= formatTime($event['time']) ?></td>
                   <td><?= $event['location'] ?></td>
