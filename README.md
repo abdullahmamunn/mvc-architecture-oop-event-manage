@@ -9,10 +9,11 @@ The **Event Management System** is a simple, web-based application built with pu
 ### Core Functionalities:
 
 - **User Authentication**: Secure login and registration with password hashing.
-- **Event Management**: Users can create, update, view, and delete events.
-- **Attendee Registration**: Register attendees and enforce event capacity limits.
-- **Event Dashboard**: View events in a paginated, sortable, and filterable format.
-- **Event Reports**: Admins can download attendee lists in CSV format.
+- **Event Management**: Authenticate Users can create, update, view, and delete events.
+- **Event Dashboard**: All events show in the Event Dashboard, Authenticate user can view events in a paginated ,can sort ASC or DESC, and can filter event location, name or upcomming event.
+- **Event Reports**: On the event  reports only admin can download attendee lists in CSV format.
+- **Public View**: All events are showing user can see view details of event and can regsiter.
+- **Attendee Registration**: One public user can register once an event when limits meets with the max capacity then user can't register and it will show **Slots Out** limits.
 
 ### Technical Features:
 

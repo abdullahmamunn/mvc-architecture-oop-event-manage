@@ -12,7 +12,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/events">
-                    <i class="bi bi-calendar-event"></i> Manage Events
+                    <i class="bi bi-calendar-event"></i> Manage My Events
                 </a>
             </li>
             <li class="nav-item">

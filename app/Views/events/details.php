@@ -66,8 +66,8 @@
                     <h2 class="fw-bold">Event Name: <?= htmlspecialchars($event['event_name']) ?></h2>
                     <h6 class="text-muted">Capacity: <?= htmlspecialchars($event['max_capacity']) ?></h6>
                     <h6 class="text-muted">Organized By: <?= ucfirst($event['organizer_name']) ?></h6>
-                    <p class="text-muted"><strong>Date:</strong> <?= htmlspecialchars($event['date']) ?></p>
-                    <p class="text-muted"><strong>Location:</strong> <?= htmlspecialchars($event['location']) ?></p>
+                    <h6 class="text-muted"><strong>Date:</strong> <?= htmlspecialchars($event['date']) ?></h6>
+                    <h6 class="text-muted"><strong>Location:</strong> <?= htmlspecialchars($event['location']) ?></h6>
                     <p class="text-justify"><?= htmlspecialchars($event['description']) ?></p>
 
                     <?php if ($attendee->countAttendees($event['id']) >= $event['max_capacity']): ?>

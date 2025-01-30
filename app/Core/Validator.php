@@ -111,7 +111,7 @@ class Validator
             $result = $db->fetchOne($query, ['value' => $value]);
 
             if ($result > 0) {
-                $this->errors[$field][] = "The $field field must be unique.";
+                $this->errors[$field][] = "The $field has already taken";
             }
         }
     }

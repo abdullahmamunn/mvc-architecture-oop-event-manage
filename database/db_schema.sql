@@ -51,18 +51,9 @@ CREATE TABLE roles (
     description TEXT
 );
 
--- Event Reports Table (Optional, for Report Logs)
-CREATE TABLE event_reports (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    event_id INT NOT NULL,
-    generated_by INT NOT NULL,
-    generated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    file_path VARCHAR(255) NOT NULL,
-    FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (generated_by) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
--- Insert Default Roles (Optional)
-INSERT INTO roles (name, description)
-VALUES ('user', 'Regular user with limited permissions'), 
-       ('admin', 'Administrator with full permissions');
+-- Insert Default Users (Optional)
+INSERT INTO users (name, email, password, role)
+VALUES ('Admin', 'admin@mail.com','$2y$10$XwSKJF/ByLZX9LxpCNsaM.rzAU6UUlOjT5Rq2oPv6njAewNELjrLO','admin'), 
+       ('User', 'user@email.com','$2y$10$XwSKJF/ByLZX9LxpCNsaM.rzAU6UUlOjT5Rq2oPv6njAewNELjrLO','user');
+
