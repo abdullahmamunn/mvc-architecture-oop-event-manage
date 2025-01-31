@@ -80,8 +80,8 @@ The **Event Management System** is a simple, web-based application built with pu
 
 | Role  | Email                                          | Password    |
 | ----- | ---------------------------------------------- | ----------- |
-| Admin | [admin@mail.com](mailto\:admin@example.com) | password123 |
-| User  | [user@email.com](mailto\:user@example.com)   | password123 |
+| Admin | [admin@mail.com](mailto\:admin@example.com) | 123456789 |
+| User  | [user@email.com](mailto\:user@example.com)   | 123456789 |
 
 
 ## License
