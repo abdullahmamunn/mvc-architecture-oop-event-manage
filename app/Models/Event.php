@@ -125,6 +125,18 @@ class Event extends BaseModel
     
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function Search($query)
+    {
+        $stmt = $this->db->getConnection()->prepare("
+        SELECT 'event' AS type, id, name FROM events WHERE name LIKE :query
+        UNION 
+        SELECT 'attendee' AS type, id, name FROM attendees WHERE name LIKE :query
+    ");
+    $stmt->execute(['query' => "%$query%"]);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $results;
+    }
     
     
 

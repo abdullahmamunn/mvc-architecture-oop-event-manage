@@ -16,7 +16,6 @@ return array(
     'App\\Core\\Database' => $baseDir . '/app/Core/Database.php',
     'App\\Core\\Router' => $baseDir . '/app/Core/Router.php',
     'App\\Core\\Validator' => $baseDir . '/app/Core/Validator.php',
-    'App\\Helper\\Helper' => $baseDir . '/app/Helper/Helper.php',
     'App\\Models\\Attendee' => $baseDir . '/app/Models/Attendee.php',
     'App\\Models\\BaseModel' => $baseDir . '/app/Models/BaseModel.php',
     'App\\Models\\Event' => $baseDir . '/app/Models/Event.php',

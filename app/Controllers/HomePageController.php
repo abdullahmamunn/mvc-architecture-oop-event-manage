@@ -35,4 +35,25 @@ class HomePageController
 
         require_once __DIR__ . '/../Views/events/details.php';
     }
-}
+
+    public function search()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['query'])) {
+            $query = trim($_POST['query']);
+            $event = new Event();
+            $results = $event->Search($query);
+            
+                if ($results) {
+                    foreach ($results as $row) {
+                        if ($row['type'] == 'event') {
+                            echo "<div class='search-item'><a href='/event/details/{$row['id']}'>📅 Event: {$row['name']}</a></div>";
+                        } else {
+                            echo "<div class='search-item'><a href='/event/details/{$row['id']}'>👤 Attendee: {$row['name']}</a></div>";
+                        }
+                    }
+                } else {
+                    echo "<div class='search-item'>No results found.</div>";
+                }
+        }
+    }
+}   

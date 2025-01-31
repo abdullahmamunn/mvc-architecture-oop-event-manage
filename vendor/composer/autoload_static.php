@@ -80,7 +80,6 @@ class ComposerStaticInit6707fac64e578be39cb719bc032c49d0
         'App\\Core\\Database' => __DIR__ . '/../..' . '/app/Core/Database.php',
         'App\\Core\\Router' => __DIR__ . '/../..' . '/app/Core/Router.php',
         'App\\Core\\Validator' => __DIR__ . '/../..' . '/app/Core/Validator.php',
-        'App\\Helper\\Helper' => __DIR__ . '/../..' . '/app/Helper/Helper.php',
         'App\\Models\\Attendee' => __DIR__ . '/../..' . '/app/Models/Attendee.php',
         'App\\Models\\BaseModel' => __DIR__ . '/../..' . '/app/Models/BaseModel.php',
         'App\\Models\\Event' => __DIR__ . '/../..' . '/app/Models/Event.php',

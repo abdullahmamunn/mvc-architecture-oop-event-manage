@@ -118,10 +118,15 @@ use App\Core\Auth; ?>
                         </ul>
                     </li>
                 <?php else: ?>
-                    <form class="form-inline">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
-                    </form>
+
+                    <?php if ($_SERVER['REQUEST_URI'] == '/'): ?>
+                        <div style="position: relative; display: inline-block; width: 100%;">
+                            <input class="form-control" type="search" name="query" id="searchQuery" placeholder="Search" aria-label="Search">
+                            <div id="searchResults"></div> <!-- Search results appear here -->
+                        </div>
+                    <?php endif; ?>
+
+
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
@@ -134,3 +139,5 @@ use App\Core\Auth; ?>
 
         </div>
     </nav>
+    <!-- <div id="searchResults"></div> -->
+   
