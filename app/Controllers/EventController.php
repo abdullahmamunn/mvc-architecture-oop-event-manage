@@ -1,8 +1,8 @@
 <?php
 namespace App\Controllers;
 
-use App\Core\Auth;
-use App\Core\Validator;
+use App\Services\Auth;
+use App\Services\Validator;
 use App\Models\Event;
 
 class EventController

@@ -35,12 +35,12 @@ class DashboardController
 
           if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) and $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
             // Only return the main content for AJAX
-            include_once __DIR__ . '/../Views/Dashboard/partials/content.php';
+            include_once __DIR__ . '/../Views/dashboard/partials/content.php';
             return;
         }
     
         // Include the full layout for non-AJAX requests
-        include_once __DIR__ . '/../Views/Dashboard/index.php';
+        include_once __DIR__ . '/../Views/dashboard/index.php';
       }
 
   }

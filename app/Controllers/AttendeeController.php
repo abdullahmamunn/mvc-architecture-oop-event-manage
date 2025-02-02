@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Core\Auth;
+use App\Services\Auth;
 use App\Models\Event;
 use App\Models\Attendee;
-use App\Core\Validator;
+use App\Services\Validator;
 
 class AttendeeController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace App\Services;
 
 class Validator
 {
@@ -106,7 +106,7 @@ class Validator
             [$table, $column] = explode('.', $tableColumn);
 
             // Assuming you have a Database class for querying
-            $db = new \App\Core\Database(); // Replace with your DB connection logic
+            $db = new \App\Services\Database(); // Replace with your DB connection logic
             $query = "SELECT COUNT(*) FROM $table WHERE $column = :value";
             $result = $db->fetchOne($query, ['value' => $value]);
 

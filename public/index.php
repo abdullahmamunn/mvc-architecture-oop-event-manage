@@ -3,7 +3,7 @@
 // Include Composer autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
 
-require_once __DIR__ . '/../app/Core/bootstrap.php';
+require_once __DIR__ . '/../app/Services/bootstrap.php';
 
 
 use App\Controllers\UserController;
@@ -12,7 +12,7 @@ use App\Controllers\EventController;
 use App\Controllers\HomePageController;
 use App\Controllers\AttendeeController;
 use App\Controllers\EventReportController;
-use App\Core\Router;
+use App\Services\Router;
 
 
 $router = new Router();

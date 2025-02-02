@@ -1,6 +1,6 @@
 <?php
 
-use App\Core\Auth; ?>
+use App\Services\Auth; ?>
 
 <!DOCTYPE html>
 <html lang="en">

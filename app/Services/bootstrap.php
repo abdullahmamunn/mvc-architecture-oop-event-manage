@@ -8,6 +8,5 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 
-
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();

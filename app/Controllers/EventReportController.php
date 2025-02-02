@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Core\Auth;
+use App\Services\Auth;
 use App\Models\Attendee;
 use App\Models\Event;
 

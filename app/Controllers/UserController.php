@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Core\Validator;
+use App\Services\Validator;
 use App\Models\User;
 
 

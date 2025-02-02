@@ -124,12 +124,6 @@
         });
     });
 
-     // Hide results when clicking outside
-    // $(document).click(function (e) {
-    //     if (!$(e.target).closest("#searchResults, #searchQuery").length) {
-    //         $("#searchResults").hide();
-    //     }
-    // });
 });
 
 </script>
