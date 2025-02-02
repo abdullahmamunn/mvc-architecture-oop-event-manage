@@ -14,6 +14,7 @@ The **Event Management System** is a simple, web-based application built with pu
 - **Event Reports**: On the event  reports only admin can download attendee lists in CSV format.
 - **Public View**: All events are showing user can see view details of event and can regsiter.
 - **Attendee Registration**: One public user can register once an event when limits meets with the max capacity then user can't register and it will show **Slots Out** limits.
+- **Search Functionalities**: User can search **Event Name** and **Attendee Name** and can find the list in details. 
 
 ### Technical Features:
 
