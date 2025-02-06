@@ -50,6 +50,7 @@ include __DIR__ . '/../templates/sidebar.php';
                 <th><a href="?sortField=name&sortOrder=<?= $sortOrder === 'ASC' ? 'DESC' : 'ASC' ?>">Name</a></th>
                 <th>Organizer</th>
                 <th><a href="?sortField=date&sortOrder=<?= $sortOrder === 'ASC' ? 'DESC' : 'ASC' ?>">Date</a></th>
+                <th><a href="?sortField=date&sortOrder=<?= $sortOrder === 'ASC' ? 'DESC' : 'ASC' ?>">Time</a></th>
                 <th>Location</th>
                 <th>Capacity</th>
                 <th>Download CSV</th>
