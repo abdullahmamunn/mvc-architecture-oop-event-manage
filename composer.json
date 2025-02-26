@@ -1,6 +1,7 @@
 {
   "name": "abdullah/event-management-system",
   "description": "A simple event management system in PHP using MVC architecture.",
+  "license": "MIT",
   "type": "project",
   "require": {
       "php": ">=8.2",
